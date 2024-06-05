@@ -1,0 +1,19 @@
+name: GitHub Actions Version Updater
+on:
+  workflow_dispatch:
+  schedule:
+    # Run every 5 minutes
+    - cron:  '*/5 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3.5.2  # No token needed for public repos
+      - name: Run GitHub Actions Version Updater
+        uses: saadmk11/github-actions-version-updater@v0.8.1
+        with:
+          # [Required] Access token with `workflow` scope.
+          token: ${{ secrets.PAT }}
+          pull_request_title: "ci: Update GitHub Actions to Latest Version"
